@@ -108,4 +108,4 @@ var initCanvas = function () {
 	drawLine(width/2, height/2, 200);
 };
 
-window.onload = init;
+// window.onload = init;

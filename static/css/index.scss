@@ -1,14 +1,369 @@
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, form, fieldset, legend, button, input, textarea, th, td { margin:0; padding:0; }
+body, button, input, select, textarea { font:12px/1.5tahoma, arial, \5b8b\4f53; }
+h1, h2, h3, h4, h5, h6{ font-size:100%; }
+address, cite, dfn, em, var { font-style:normal; }
+code, kbd, pre, samp { font-family:couriernew, courier, monospace; }
+small{ font-size:12px; }
+ul, ol { list-style:none; }
+a { text-decoration:none; }
+sup { vertical-align:text-top; }
+sub{ vertical-align:text-bottom; }
+legend { color:#000; }
+fieldset, img { border:0; }
+button, input, select, textarea { font-size:100%; }
+table { border-collapse:collapse; border-spacing:0; }
+
+.clearfix {
+  clear: both;
+  *zoom: 1;
+}
+
 html,body,.container,#banner-canvas {
   width: 100%;
   height: 100%;
 }
 body {
-  font-family: "Microsoft YaHei", sans-serif;
+  font: 14px "Microsoft YaHei", sans-serif;
+  background-color: #231f54;
 }
 
 #banner-canvas {
   position: fixed;
   top: 0;
   left: 0;
-  background: #000;
+}
+
+.side-heros {
+  // position: absolute;
+  // top: 550px;
+  position: fixed;
+    top: 300px;
+  right: 78px;
+  width: 132px;
+  z-index: 1;
+
+  &.fixed {
+    position: fixed;
+    top: 300px;
+  }
+
+  .to-top {
+    display: block;
+    width: 56px;
+    height: 40px;
+    background: url(../images/totop-icon.png);
+    margin: 0 auto;
+    margin-bottom: 12px;
+  }
+  .side-heros-item {
+    float: left;
+    width: 66px;
+    height: 66px;
+  }
+  .side-heros-link {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    background-image: url(../images/side-heros-default.png);
+
+    &-1 {
+      background-position: -1px -1px;
+    }
+    &-2 {
+      background-position: -1px -76px;
+    }
+    &-3 {
+      background-position: -1px -151px;
+    }
+    &-4 {
+      background-position: -1px -226px;
+    }
+    &-5 {
+      background-position: -1px -301px;
+    }
+    &-6 {
+      background-position: -1px -376px;
+    }
+    &-7 {
+      background-position: -1px -451px;
+    }
+    &-8 {
+      background-position: -1px -524px;
+    }
+    &-9 {
+      background-position: -68px -1px;
+    }
+    &-10 {
+      background-position: -68px -76px;
+    }
+    &-11 {
+      background-position: -68px -151px;
+    }
+    &-12{
+      background-position: -68px -226px;
+    }
+    &-13 {
+      background-position: -68px -301px;
+    }
+    &-14 {
+      background-position: -68px -376px;
+    }
+    &-15 {
+      background-position: -68px -451px;
+    }
+    &-16 {
+      background-position: -68px -524px;
+    }
+
+    &:hover,
+    &:active {
+      background-image: url(../images/side-heros-active.png);
+    }
+  }
+}
+
+.center-wrapper {
+  width: 930px;
+  height: 100%;
+  padding: 0 35px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.banner {
+  height: 786px;
+  background: url(../images/banner-bg.jpg) center top no-repeat;
+
+  .lol-link {
+    display: block;
+    width: 190px;
+    height: 122px;
+    background: url(../images/lol-logo.png);
+    position: absolute;
+    z-index: 1;
+    top: 24px;
+    left: 5px;
+  }
+  .daoju-link {
+    display: block;
+    width: 255px;
+    height: 54px;
+    background: url(../images/daoju-logo.png);
+    position: absolute;
+    z-index: 1;
+    top: 60px;
+    left: 214px;
+  }
+  .login-link {
+    font-size: 14px;
+    color: #fff;
+    position: absolute;
+    top: 20px;
+    right: 256px;
+  }
+
+  img {
+    position: absolute;
+  }
+  .banner-akali {
+    left: 176px;
+  }
+  .banner-akalistore-text {
+    top: 285px;
+    left: 119px;
+  }
+  .banner-alika-text {
+    top: 280px;
+    left: 115px;
+  }
+  .banner-store-text {
+    top: 362px;
+    left: 382px;
+  }
+  .banner-lucky-text {
+    top: 313px;
+    left: 692px;
+  }
+  .banner-top-text {
+    top: 532px;
+    left: 170px;
+  }
+  .banner-bottom-text {
+    top: 542px;
+    left: 426px;
+  }
+  .banner-starttime {
+    top: 606px;
+    left: 290px;
+  }
+  .banner-btn {
+    top: 654px;
+    left: 344px;
+  }
+  
+}
+
+.heros {
+  height: 484px;
+  color: #8a48fa;
+
+  .hero-box {
+    padding-top: 58px;
+  }
+  .hero-box-header {
+    margin-bottom: 6px;
+
+    &:after,&:before{
+      content: " ";
+      visibility: hidden;
+      display: block;
+      height: 0;
+      clear: both;
+    }
+  }
+  .hero-box-title {
+    font-size: 45px;
+    float: left;
+    
+    .hero-icon {
+      display: inline-block;
+      width: 80px;
+      height: 80px;
+      background: #ddd;
+      border-radius: 50%;
+      margin: -1px 0 0 -3px;
+      float: left;
+      background-image: url(/static/images/hero-box-icons.png);
+      background-size: 222%;
+
+      &-1 {
+        background-position: -4px -4px;
+      }
+      &-2 {
+        background-position: -4px -100px;
+      }
+      &-3 {
+        background-position: -4px -196px;
+      }
+      &-4 {
+        background-position: -4px -292px;
+      }
+      &-5 {
+        background-position: -4px -388px;
+      }
+      &-6 {
+        background-position: -4px -484px;
+      }
+      &-7 {
+        background-position: -4px -580px;
+      }
+      &-8 {
+        background-position: -4px -672px;
+      }
+      &-9 {
+        background-position: -88px -4px;
+      }
+      &-10 {
+        background-position: -88px -100px;
+      }
+      &-11 {
+        background-position: -88px -196px;
+      }
+      &-12 {
+        background-position: -88px -292px;
+      }
+      &-13 {
+        background-position: -88px -388px;
+      }
+      &-14 {
+        background-position: -88px -484px;
+      }
+      &-15 {
+        background-position: -88px -580px;
+      }
+      &-16 {
+        background-position: -88px -672px;
+      }
+    }
+    p {
+      line-height: 72px;
+      padding-left: 13px;
+      float: left;
+      font-weight: 400;
+    }
+    strong {
+      color: #fff;
+      padding-right: 13px;
+    }
+  }
+
+  .hero-box-sale {
+    float: right;
+    margin: -17px 15px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    strong {
+      font: 90px impact;
+      padding: 0 6px;
+      color: #ffd600;
+    }
+  }
+  .hero-list {
+    overflow: hidden;
+  }
+  .hero-item {
+    width: 146px;
+    float: left;
+    margin-left: 10px;
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+  .hero-pic {
+    display: block;
+    width: 100%;
+    height: 194px;
+    position: relative;
+    background-color: rgba(255, 255, 255, .1);
+    background-image: url(/static/images/hero-buy-pic.jpg);
+    margin-bottom: 10px;
+
+    .hero-unknown-icon {
+      display: inline-block;
+      width: 46px;
+      height: 60px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-left: -23px;
+      margin-top: -30px;
+      background: url(/static/images/hero-unknown-icon.png);
+    }
+  }
+  .hero-buy-btn {
+    display: block;
+    width: 100%;
+    height: 43px;
+    line-height: 42px;
+    color: #955afb;
+    background: url(/static/images/hero-buy-default.png);
+    text-align: center;
+    text-indent: 22px;
+
+    &:hover {
+      color: #ffd800;
+      background: url(/static/images/hero-buy-hover.png);
+    }
+  }
+  .hero-box-bottom {
+    display: block;
+    width: 103%;
+    margin-left: -1.5%;
+    height: 9px;
+    background: url(/static/images/hero-box-bottom.png);
+    margin-top: 67px;
+  }
 }
