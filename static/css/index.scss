@@ -18,33 +18,64 @@ table { border-collapse:collapse; border-spacing:0; }
   *zoom: 1;
 }
 
-html,body,.container,#banner-canvas {
-  width: 100%;
-  height: 100%;
+@keyframes myShow{
+  100% {
+    opacity: 1;
+    transform: none;
+  }
 }
+
+@keyframes totopAnimate {
+  0% {
+    transform: translate(0, 0);
+    // opacity: 1;
+  }
+  100% {
+    transform: translate(0, -10px);
+    // opacity: 0;
+  }
+}
+
+@mixin addAnim($delay, $dur: 1s, $offsetX: 0, $offsetY: 50px) {
+  opacity: 0;
+  transform: translate3d($offsetX, $offsetY, 0);
+  animation: myShow $dur $delay;
+  animation-fill-mode: forwards;
+}
+
+@mixin cancelAnim {
+  transform: none !important;
+  opacity: 1 !important;
+}
+
+// html,body,.container {
+//   width: 100%;
+//   height: 100%;
+// }
 body {
   font: 14px "Microsoft YaHei", sans-serif;
   background-color: #231f54;
 }
 
 #banner-canvas {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
 }
 
 .side-heros {
-  // position: absolute;
-  // top: 550px;
-  position: fixed;
-    top: 300px;
+  position: absolute;
+  top: 550px;
+  // position: fixed;
+  // top: 300px;
   right: 78px;
   width: 132px;
   z-index: 1;
+  @include addAnim(3s, 1s, 0, 50px);
 
   &.fixed {
     position: fixed;
-    top: 300px;
+    top: 200px;
   }
 
   .to-top {
@@ -54,6 +85,8 @@ body {
     background: url(../images/totop-icon.png);
     margin: 0 auto;
     margin-bottom: 12px;
+    cursor: pointer;
+    // animation: totopAnimate 2s infinite;
   }
   .side-heros-item {
     float: left;
@@ -116,7 +149,7 @@ body {
     }
 
     &:hover,
-    &:active {
+    &.active {
       background-image: url(../images/side-heros-active.png);
     }
   }
@@ -143,6 +176,7 @@ body {
     z-index: 1;
     top: 24px;
     left: 5px;
+    @include addAnim(2.5s, 1s, 0, -20px);
   }
   .daoju-link {
     display: block;
@@ -153,6 +187,7 @@ body {
     z-index: 1;
     top: 60px;
     left: 214px;
+    @include addAnim(2.5s, 1s, 0, -20px);
   }
   .login-link {
     font-size: 14px;
@@ -160,6 +195,7 @@ body {
     position: absolute;
     top: 20px;
     right: 256px;
+    @include addAnim(2.5s, 1s, 0, -20px);
   }
 
   img {
@@ -167,45 +203,109 @@ body {
   }
   .banner-akali {
     left: 176px;
+    @include addAnim(0s);
   }
   .banner-akalistore-text {
     top: 285px;
     left: 119px;
+    @include addAnim(1.2s, 1s, 0, 0);
   }
   .banner-alika-text {
     top: 280px;
     left: 115px;
+    @include addAnim(1s, .5s, -200px, 30px);
   }
   .banner-store-text {
     top: 362px;
     left: 382px;
+    @include addAnim(1s, .5s, 200px, -30px);
   }
   .banner-lucky-text {
     top: 313px;
     left: 692px;
+    @include addAnim(1.1s, .5s, 200px, -30px);
   }
   .banner-top-text {
     top: 532px;
     left: 170px;
+    @include addAnim(1.8s, .5s, -200px, 30px);
   }
   .banner-bottom-text {
     top: 542px;
     left: 426px;
+    @include addAnim(2.1s, .5s, 200px, -30px);
   }
   .banner-starttime {
     top: 606px;
     left: 290px;
+    @include addAnim(2.5s, 1s, 0, 20px);
   }
   .banner-btn {
     top: 654px;
     left: 344px;
+    @include addAnim(2.5s, 1s, 0, 20px);
+    cursor: pointer;
   }
   
+  .banner-triangle {
+    position: absolute;
+  }
+  .banner-triangle-1 {
+    top: 530px;
+    right: -30px;
+    @include addAnim(1s, .5s, -200px, 20px);
+  }
+  .banner-triangle-2 {
+    top: 330px;
+    left: -178px;
+    @include addAnim(1s, .5s, 500px, 100px);
+  }
+  .banner-triangle-3 {
+    top: 94px;
+    right: 54px;
+    @include addAnim(1s, 1s, -500px, 200px);
+  }
+  .banner-triangle-4 {
+    top: 528px;
+    left: 100px;
+    @include addAnim(1s, 1s, 300px, -120px);
+  }
+  .banner-triangle-5 {
+    top: 242px;
+    left: 662px;
+    @include addAnim(1s, .4s, -100px, -100px);
+  }
+  .banner-triangle-6 {
+    top: 210px;
+    left: 450px;
+    @include addAnim(1s, 1s, 100px, 120px);
+  }
+  .banner-triangle-7 {
+    top: 116px;
+    left: -434px;
+    @include addAnim(1s, .5s, 800px, 120px);
+  }
+  .banner-triangle-8 {
+    top: 230px;
+    right: 58px;
+    @include addAnim(1s, 1s, -400px, 20px);
+  }
+  .banner-triangle-9 {
+    top: 166px;
+    left: 120px;
+    @include addAnim(1s, .8s, 300px, 00px);
+  }
+  .banner-triangle-10 {
+    top: 280px;
+    left: -130px;
+    @include addAnim(1s, 1s, 400px, 120px);
+  }
 }
 
 .heros {
-  height: 484px;
   color: #8a48fa;
+  background: url(../images/content-bg.jpg) center repeat;
+  margin-bottom: 150px;
 
   .hero-box {
     padding-top: 58px;
@@ -233,7 +333,7 @@ body {
       border-radius: 50%;
       margin: -1px 0 0 -3px;
       float: left;
-      background-image: url(/static/images/hero-box-icons.png);
+      background-image: url(../images/hero-box-icons.png);
       background-size: 222%;
 
       &-1 {
@@ -328,7 +428,7 @@ body {
     height: 194px;
     position: relative;
     background-color: rgba(255, 255, 255, .1);
-    background-image: url(/static/images/hero-buy-pic.jpg);
+    background-image: url(../images/hero-buy-pic.jpg);
     margin-bottom: 10px;
 
     .hero-unknown-icon {
@@ -340,7 +440,7 @@ body {
       left: 50%;
       margin-left: -23px;
       margin-top: -30px;
-      background: url(/static/images/hero-unknown-icon.png);
+      background: url(../images/hero-unknown-icon.png);
     }
   }
   .hero-buy-btn {
@@ -349,13 +449,13 @@ body {
     height: 43px;
     line-height: 42px;
     color: #955afb;
-    background: url(/static/images/hero-buy-default.png);
+    background: url(../images/hero-buy-default.png);
     text-align: center;
     text-indent: 22px;
 
     &:hover {
       color: #ffd800;
-      background: url(/static/images/hero-buy-hover.png);
+      background: url(../images/hero-buy-hover.png);
     }
   }
   .hero-box-bottom {
@@ -363,7 +463,32 @@ body {
     width: 103%;
     margin-left: -1.5%;
     height: 9px;
-    background: url(/static/images/hero-box-bottom.png);
+    background: url(../images/hero-box-bottom.png);
     margin-top: 67px;
+  }
+}
+
+.rule {
+  color: #fff;
+  text-align: center;
+  padding: 18px 0 100px;
+
+  h1 {
+    font-size: 38px;
+    color: #8e73f2;
+    font-weight: 400;
+  }
+  .rule-list {
+    padding-top: 8px;
+  }
+  .rule-item {
+    strong {
+      color: #ffea00;
+      line-height: 30px;
+    }
+  }
+  .loopup-explain-btn {
+    color: #0d1627;
+    font-size: 12px;
   }
 }

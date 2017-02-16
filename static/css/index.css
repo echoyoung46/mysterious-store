@@ -46,35 +46,45 @@ table {
   clear: both;
   *zoom: 1; }
 
-html, body, .container, #banner-canvas {
-  width: 100%;
-  height: 100%; }
-
+@keyframes myShow {
+  100% {
+    opacity: 1;
+    transform: none; } }
+@keyframes totopAnimate {
+  0% {
+    transform: translate(0, 0); }
+  100% {
+    transform: translate(0, -10px); } }
 body {
   font: 14px "Microsoft YaHei", sans-serif;
   background-color: #231f54; }
 
 #banner-canvas {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0; }
 
 .side-heros {
-  position: fixed;
-  top: 300px;
+  position: absolute;
+  top: 550px;
   right: 78px;
   width: 132px;
-  z-index: 1; }
+  z-index: 1;
+  opacity: 0;
+  transform: translate3d(0, 50px, 0);
+  animation: myShow 1s 3s;
+  animation-fill-mode: forwards; }
   .side-heros.fixed {
     position: fixed;
-    top: 300px; }
+    top: 200px; }
   .side-heros .to-top {
     display: block;
     width: 56px;
     height: 40px;
     background: url(../images/totop-icon.png);
     margin: 0 auto;
-    margin-bottom: 12px; }
+    margin-bottom: 12px;
+    cursor: pointer; }
   .side-heros .side-heros-item {
     float: left;
     width: 66px;
@@ -116,7 +126,7 @@ body {
       background-position: -68px -451px; }
     .side-heros .side-heros-link-16 {
       background-position: -68px -524px; }
-    .side-heros .side-heros-link:hover, .side-heros .side-heros-link:active {
+    .side-heros .side-heros-link:hover, .side-heros .side-heros-link.active {
       background-image: url(../images/side-heros-active.png); }
 
 .center-wrapper {
@@ -137,7 +147,11 @@ body {
     position: absolute;
     z-index: 1;
     top: 24px;
-    left: 5px; }
+    left: 5px;
+    opacity: 0;
+    transform: translate3d(0, -20px, 0);
+    animation: myShow 1s 2.5s;
+    animation-fill-mode: forwards; }
   .banner .daoju-link {
     display: block;
     width: 255px;
@@ -146,45 +160,163 @@ body {
     position: absolute;
     z-index: 1;
     top: 60px;
-    left: 214px; }
+    left: 214px;
+    opacity: 0;
+    transform: translate3d(0, -20px, 0);
+    animation: myShow 1s 2.5s;
+    animation-fill-mode: forwards; }
   .banner .login-link {
     font-size: 14px;
     color: #fff;
     position: absolute;
     top: 20px;
-    right: 256px; }
+    right: 256px;
+    opacity: 0;
+    transform: translate3d(0, -20px, 0);
+    animation: myShow 1s 2.5s;
+    animation-fill-mode: forwards; }
   .banner img {
     position: absolute; }
   .banner .banner-akali {
-    left: 176px; }
+    left: 176px;
+    opacity: 0;
+    transform: translate3d(0, 50px, 0);
+    animation: myShow 1s 0s;
+    animation-fill-mode: forwards; }
   .banner .banner-akalistore-text {
     top: 285px;
-    left: 119px; }
+    left: 119px;
+    opacity: 0;
+    transform: translate3d(0, 0, 0);
+    animation: myShow 1s 1.2s;
+    animation-fill-mode: forwards; }
   .banner .banner-alika-text {
     top: 280px;
-    left: 115px; }
+    left: 115px;
+    opacity: 0;
+    transform: translate3d(-200px, 30px, 0);
+    animation: myShow 0.5s 1s;
+    animation-fill-mode: forwards; }
   .banner .banner-store-text {
     top: 362px;
-    left: 382px; }
+    left: 382px;
+    opacity: 0;
+    transform: translate3d(200px, -30px, 0);
+    animation: myShow 0.5s 1s;
+    animation-fill-mode: forwards; }
   .banner .banner-lucky-text {
     top: 313px;
-    left: 692px; }
+    left: 692px;
+    opacity: 0;
+    transform: translate3d(200px, -30px, 0);
+    animation: myShow 0.5s 1.1s;
+    animation-fill-mode: forwards; }
   .banner .banner-top-text {
     top: 532px;
-    left: 170px; }
+    left: 170px;
+    opacity: 0;
+    transform: translate3d(-200px, 30px, 0);
+    animation: myShow 0.5s 1.8s;
+    animation-fill-mode: forwards; }
   .banner .banner-bottom-text {
     top: 542px;
-    left: 426px; }
+    left: 426px;
+    opacity: 0;
+    transform: translate3d(200px, -30px, 0);
+    animation: myShow 0.5s 2.1s;
+    animation-fill-mode: forwards; }
   .banner .banner-starttime {
     top: 606px;
-    left: 290px; }
+    left: 290px;
+    opacity: 0;
+    transform: translate3d(0, 20px, 0);
+    animation: myShow 1s 2.5s;
+    animation-fill-mode: forwards; }
   .banner .banner-btn {
     top: 654px;
-    left: 344px; }
+    left: 344px;
+    opacity: 0;
+    transform: translate3d(0, 20px, 0);
+    animation: myShow 1s 2.5s;
+    animation-fill-mode: forwards;
+    cursor: pointer; }
+  .banner .banner-triangle {
+    position: absolute; }
+  .banner .banner-triangle-1 {
+    top: 530px;
+    right: -30px;
+    opacity: 0;
+    transform: translate3d(-200px, 20px, 0);
+    animation: myShow 0.5s 1s;
+    animation-fill-mode: forwards; }
+  .banner .banner-triangle-2 {
+    top: 330px;
+    left: -178px;
+    opacity: 0;
+    transform: translate3d(500px, 100px, 0);
+    animation: myShow 0.5s 1s;
+    animation-fill-mode: forwards; }
+  .banner .banner-triangle-3 {
+    top: 94px;
+    right: 54px;
+    opacity: 0;
+    transform: translate3d(-500px, 200px, 0);
+    animation: myShow 1s 1s;
+    animation-fill-mode: forwards; }
+  .banner .banner-triangle-4 {
+    top: 528px;
+    left: 100px;
+    opacity: 0;
+    transform: translate3d(300px, -120px, 0);
+    animation: myShow 1s 1s;
+    animation-fill-mode: forwards; }
+  .banner .banner-triangle-5 {
+    top: 242px;
+    left: 662px;
+    opacity: 0;
+    transform: translate3d(-100px, -100px, 0);
+    animation: myShow 0.4s 1s;
+    animation-fill-mode: forwards; }
+  .banner .banner-triangle-6 {
+    top: 210px;
+    left: 450px;
+    opacity: 0;
+    transform: translate3d(100px, 120px, 0);
+    animation: myShow 1s 1s;
+    animation-fill-mode: forwards; }
+  .banner .banner-triangle-7 {
+    top: 116px;
+    left: -434px;
+    opacity: 0;
+    transform: translate3d(800px, 120px, 0);
+    animation: myShow 0.5s 1s;
+    animation-fill-mode: forwards; }
+  .banner .banner-triangle-8 {
+    top: 230px;
+    right: 58px;
+    opacity: 0;
+    transform: translate3d(-400px, 20px, 0);
+    animation: myShow 1s 1s;
+    animation-fill-mode: forwards; }
+  .banner .banner-triangle-9 {
+    top: 166px;
+    left: 120px;
+    opacity: 0;
+    transform: translate3d(300px, 0px, 0);
+    animation: myShow 0.8s 1s;
+    animation-fill-mode: forwards; }
+  .banner .banner-triangle-10 {
+    top: 280px;
+    left: -130px;
+    opacity: 0;
+    transform: translate3d(400px, 120px, 0);
+    animation: myShow 1s 1s;
+    animation-fill-mode: forwards; }
 
 .heros {
-  height: 484px;
-  color: #8a48fa; }
+  color: #8a48fa;
+  background: url(../images/content-bg.jpg) center repeat;
+  margin-bottom: 150px; }
   .heros .hero-box {
     padding-top: 58px; }
   .heros .hero-box-header {
@@ -206,7 +338,7 @@ body {
       border-radius: 50%;
       margin: -1px 0 0 -3px;
       float: left;
-      background-image: url(/static/images/hero-box-icons.png);
+      background-image: url(../images/hero-box-icons.png);
       background-size: 222%; }
       .heros .hero-box-title .hero-icon-1 {
         background-position: -4px -4px; }
@@ -272,7 +404,7 @@ body {
     height: 194px;
     position: relative;
     background-color: rgba(255, 255, 255, 0.1);
-    background-image: url(/static/images/hero-buy-pic.jpg);
+    background-image: url(../images/hero-buy-pic.jpg);
     margin-bottom: 10px; }
     .heros .hero-pic .hero-unknown-icon {
       display: inline-block;
@@ -283,25 +415,42 @@ body {
       left: 50%;
       margin-left: -23px;
       margin-top: -30px;
-      background: url(/static/images/hero-unknown-icon.png); }
+      background: url(../images/hero-unknown-icon.png); }
   .heros .hero-buy-btn {
     display: block;
     width: 100%;
     height: 43px;
     line-height: 42px;
     color: #955afb;
-    background: url(/static/images/hero-buy-default.png);
+    background: url(../images/hero-buy-default.png);
     text-align: center;
     text-indent: 22px; }
     .heros .hero-buy-btn:hover {
       color: #ffd800;
-      background: url(/static/images/hero-buy-hover.png); }
+      background: url(../images/hero-buy-hover.png); }
   .heros .hero-box-bottom {
     display: block;
     width: 103%;
     margin-left: -1.5%;
     height: 9px;
-    background: url(/static/images/hero-box-bottom.png);
+    background: url(../images/hero-box-bottom.png);
     margin-top: 67px; }
+
+.rule {
+  color: #fff;
+  text-align: center;
+  padding: 18px 0 100px; }
+  .rule h1 {
+    font-size: 38px;
+    color: #8e73f2;
+    font-weight: 400; }
+  .rule .rule-list {
+    padding-top: 8px; }
+  .rule .rule-item strong {
+    color: #ffea00;
+    line-height: 30px; }
+  .rule .loopup-explain-btn {
+    color: #0d1627;
+    font-size: 12px; }
 
 /*# sourceMappingURL=index.css.map */
