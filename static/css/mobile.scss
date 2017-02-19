@@ -1,0 +1,298 @@
+@function px2percent($px, $base: 640) {
+  @return ($px / $base) * 100%;
+}
+
+@keyframes myShow{
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@mixin addAnim($delay, $dur: 1s, $offsetX: 0, $offsetY: 50px) {
+  opacity: 0;
+  transform: translate3d($offsetX, $offsetY, 0);
+  animation: myShow $dur $delay;
+  animation-fill-mode: forwards;
+}
+
+@keyframes scoreChange {
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: none;
+  }
+}
+html,
+body,
+.container {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  background-color: #eee;
+  color: #fff;
+  font: 14px "Microsoft YaHei", sans-serif;
+}
+.container {
+  background: url(../images/mobile-bg.jpg) center top no-repeat;
+  background-size: contain;
+  box-sizing: border-box;
+  padding: 0 px2percent(15);
+}
+
+.school-header {
+  height: px2percent(130, 1008);
+  position: relative;
+
+  .school-user-container {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+  }
+  .school-user-left {
+    left: 0;
+  }
+  .school-user-right {
+    right: 0;
+    text-align: right;
+  }
+  .school-user-1 {
+    background: url(../images/mobile-avatar-1.png);
+    float: left;
+  }
+  .school-user-2 {
+    background: url(../images/mobile-avatar-2.png);
+    float: right;
+  }
+  .school-user-avatar {
+    display: inline-block;
+    width: 53px;
+    height: 54px;
+    background-size: cover;
+    @include addAnim(.5s, 1s, 0, -50%);
+  }
+  .user-info {
+    float: left;
+    @include addAnim(.8s, 1s, 0, 0);
+  }
+  .user-name {
+    font-size: 11px;
+    text-shadow: 0 1.5px 1.5px #30a7b3;
+  }
+  .user-score {
+    font-size: 31px;
+    color: #ffe400;
+    text-shadow: 0 1.5px 1.5px rgba(0, 0, 0, .53);
+    position: relative;
+  }
+  .change-score {
+    color: #abfe37;
+    font-size: 12px;
+    position: absolute;
+    left: -14px;
+    top: -15px;
+    opacity: 0;
+    transform: translate(0, 20px);
+    animation: scoreChange 1s .8s;
+  }
+  .school-vs {
+    position: absolute;
+    width: 63px;
+    height: 65px;
+    background: url(../images/mobile-vs.png);
+    background-size: cover;
+    left: 50%;
+    margin-left: -32px;
+    text-align: center;
+    @include addAnim(0s, 1s, 0, -100%);
+  }
+  .question-number-container {
+    font-size: 13px;
+    text-shadow: 0 1.5px 1.5px #fd6128;
+  }
+  .question-number {
+    color: #ffff00;
+    font-weight: bold;
+  }
+}
+
+@keyframes boyRotate {
+  form {
+    transform: rotate(-5deg);
+  }
+  to {
+    transform: rotate(5deg);
+  }
+}
+
+.school-question {
+  position: relative;
+  .question-bg {
+    width: 100%;
+    display: block;
+  }
+  .school-question-content {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+    text-shadow: 0 2px 2px #000;
+  }
+  .question-boy {
+    width: 67px;
+    height: 64px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    animation: boyRotate 1s infinite;
+  }
+  .question-title {
+    font-size: 17px;
+    font-weight: 400;
+    padding: px2percent(72, 341) 0 px2percent(54, 341);
+  }
+  .question-choose-item {
+    font-size: 16.5px;
+    line-height: 22px;
+    text-indent: 5px;
+
+    .question-choose-a {
+      color: #91d929;
+    }
+    .question-choose-b {
+      color: #6eb6fd;
+    }
+  }
+}
+
+.school-result {
+  position: relative;
+
+  .school-result-bg {
+    width: 100%;
+    display: block;
+  }
+  .result-column {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    font-size: 11px;
+    text-align: center;
+  }
+  .remain-time-column {
+    width: px2percent(416, 610);
+    left: 0;
+  }
+  .curr-column {
+    width: px2percent(194, 610);
+    right: 0;
+    text-shadow: 0 1.5px 1.5px rgba(248, 115, 67, 1);
+  }
+
+  .time-container {
+    width: 136px;
+    height: 10px;
+    background: url(../images/mobile-score-container.png) no-repeat;
+    background-size: contain;
+    position: absolute;
+    top: px2percent(60, 154);
+    left: px2percent(22, 416);
+    overflow: hidden;
+    
+    .time-part {
+      display: inline-block;
+      width: 33.333%;
+      height: 80%;
+      background: #fffe1c;
+      border-radius: 2px;
+      float: left;
+    }
+    .time-part-2 {
+      width: 26.667%;
+    }
+    .time-part-3 {
+      width: 0;
+    }
+  }
+  .remain-time {
+    position: absolute;
+    top: px2percent(38, 154);
+    left: px2percent(304, 416);
+    font-size: 28px;
+
+    sup {
+      font-size: 10px;
+      color: #ffe7be;
+      padding-left: 5px;
+    }
+  }
+  .remain-time-text {
+    letter-spacing: 1px;
+    color: #ffe7be;
+    width: 100%;
+    position: absolute;
+    top: px2percent(88, 154);
+    left: 0;
+  }
+  .curr-score {
+    color: #fff;
+    font-size: 28px;
+    margin-top: px2percent(34, 154);
+  }
+  .curr-score-text {
+    margin-top: -2px;
+    letter-spacing: 1px;
+    color: #ffe7be;
+  }
+}
+
+.school-choose {
+  padding-top: px2percent(20, 1008);
+
+  &:after {
+    content: '';
+    clear: both;
+  }
+  .school-choose-box {
+    color: #fff;
+    font-size: 60px;
+    text-align: center;
+    width: px2percent(300);
+    height: px2percent(227, 1008);
+    line-height: 100px;
+    border-radius: 5px;
+    position: relative;
+  }
+  .box-a {
+    float: left;
+    background: #91d929;
+    box-shadow: 0px 7px 0px 0px #61a81d;
+    text-shadow: 0 2.5px 8px rgba(145, 217, 41, .7);
+  }
+  .box-b {
+    float: right;
+    background: #03A9F4;
+    box-shadow: 0px 7px 0px 0px #538ed5;
+    text-shadow: 0 2.5px 8px rgba(3, 169, 244, .7);
+  }
+  .shadow {
+    position: absolute;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: transparent;
+    left: 50%;
+    margin-left: -10px;
+    bottom: -40px;
+  }
+  .shadow-a {
+    box-shadow: 0px -60px 60px 0px #61a81d;
+  }
+  .shadow-b {
+    box-shadow: 0px -60px 60px 0px #538ed5;
+  }
+}

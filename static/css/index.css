@@ -1,47 +1,3 @@
-body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, form, fieldset, legend, button, input, textarea, th, td {
-  margin: 0;
-  padding: 0; }
-
-body, button, input, select, textarea {
-  font: 12px/1.5tahoma, arial, \5b8b\4f53; }
-
-h1, h2, h3, h4, h5, h6 {
-  font-size: 100%; }
-
-address, cite, dfn, em, var {
-  font-style: normal; }
-
-code, kbd, pre, samp {
-  font-family: couriernew, courier, monospace; }
-
-small {
-  font-size: 12px; }
-
-ul, ol {
-  list-style: none; }
-
-a {
-  text-decoration: none; }
-
-sup {
-  vertical-align: text-top; }
-
-sub {
-  vertical-align: text-bottom; }
-
-legend {
-  color: #000; }
-
-fieldset, img {
-  border: 0; }
-
-button, input, select, textarea {
-  font-size: 100%; }
-
-table {
-  border-collapse: collapse;
-  border-spacing: 0; }
-
 .clearfix {
   clear: both;
   *zoom: 1; }
@@ -56,8 +12,10 @@ table {
   100% {
     transform: translate(0, -10px); } }
 body {
-  font: 14px "Microsoft YaHei", sans-serif;
-  background-color: #231f54; }
+  font: 14px "Microsoft YaHei", sans-serif; }
+
+.container {
+  display: none; }
 
 #banner-canvas {
   position: absolute;
@@ -72,7 +30,7 @@ body {
   z-index: 1;
   opacity: 0;
   transform: translate3d(0, 50px, 0);
-  animation: myShow 1s 3s;
+  animation: myShow 1s 2.2s;
   animation-fill-mode: forwards; }
   .side-heros.fixed {
     position: fixed;
@@ -126,7 +84,7 @@ body {
       background-position: -68px -451px; }
     .side-heros .side-heros-link-16 {
       background-position: -68px -524px; }
-    .side-heros .side-heros-link:hover, .side-heros .side-heros-link.active {
+    .side-heros .side-heros-link.active {
       background-image: url(../images/side-heros-active.png); }
 
 .center-wrapper {
@@ -138,7 +96,8 @@ body {
 
 .banner {
   height: 786px;
-  background: url(../images/banner-bg.jpg) center top no-repeat; }
+  background: url(../images/banner-bg.jpg) center top no-repeat;
+  overflow: hidden; }
   .banner .lol-link {
     display: block;
     width: 190px;
@@ -150,7 +109,7 @@ body {
     left: 5px;
     opacity: 0;
     transform: translate3d(0, -20px, 0);
-    animation: myShow 1s 2.5s;
+    animation: myShow 1s 1.6s;
     animation-fill-mode: forwards; }
   .banner .daoju-link {
     display: block;
@@ -163,7 +122,7 @@ body {
     left: 214px;
     opacity: 0;
     transform: translate3d(0, -20px, 0);
-    animation: myShow 1s 2.5s;
+    animation: myShow 1s 1.8s;
     animation-fill-mode: forwards; }
   .banner .login-link {
     font-size: 14px;
@@ -173,12 +132,13 @@ body {
     right: 256px;
     opacity: 0;
     transform: translate3d(0, -20px, 0);
-    animation: myShow 1s 2.5s;
+    animation: myShow 1s 2s;
     animation-fill-mode: forwards; }
   .banner img {
     position: absolute; }
   .banner .banner-akali {
-    left: 176px;
+    left: 107px;
+    top: -100px;
     opacity: 0;
     transform: translate3d(0, 50px, 0);
     animation: myShow 1s 0s;
@@ -188,135 +148,211 @@ body {
     left: 119px;
     opacity: 0;
     transform: translate3d(0, 0, 0);
-    animation: myShow 1s 1.2s;
+    animation: myShow 1s 0.7s;
     animation-fill-mode: forwards; }
   .banner .banner-alika-text {
     top: 280px;
     left: 115px;
     opacity: 0;
     transform: translate3d(-200px, 30px, 0);
-    animation: myShow 0.5s 1s;
+    animation: myShow 0.5s 0.5s;
     animation-fill-mode: forwards; }
   .banner .banner-store-text {
     top: 362px;
     left: 382px;
     opacity: 0;
     transform: translate3d(200px, -30px, 0);
-    animation: myShow 0.5s 1s;
+    animation: myShow 0.5s 0.5s;
     animation-fill-mode: forwards; }
   .banner .banner-lucky-text {
     top: 313px;
     left: 692px;
     opacity: 0;
     transform: translate3d(200px, -30px, 0);
-    animation: myShow 0.5s 1.1s;
+    animation: myShow 0.5s 0.6s;
     animation-fill-mode: forwards; }
   .banner .banner-top-text {
     top: 532px;
     left: 170px;
     opacity: 0;
     transform: translate3d(-200px, 30px, 0);
-    animation: myShow 0.5s 1.8s;
+    animation: myShow 0.5s 1s;
     animation-fill-mode: forwards; }
   .banner .banner-bottom-text {
     top: 542px;
     left: 426px;
     opacity: 0;
     transform: translate3d(200px, -30px, 0);
-    animation: myShow 0.5s 2.1s;
+    animation: myShow 0.5s 1.2s;
     animation-fill-mode: forwards; }
   .banner .banner-starttime {
     top: 606px;
     left: 290px;
     opacity: 0;
     transform: translate3d(0, 20px, 0);
-    animation: myShow 1s 2.5s;
+    animation: myShow 1s 1.5s;
     animation-fill-mode: forwards; }
   .banner .banner-btn {
     top: 654px;
     left: 344px;
     opacity: 0;
     transform: translate3d(0, 20px, 0);
-    animation: myShow 1s 2.5s;
+    animation: myShow 1s 1.5s;
     animation-fill-mode: forwards;
     cursor: pointer; }
+  .banner .banner-line {
+    position: absolute;
+    display: inline-block;
+    background-image: url(../images/banner-lines.png); }
+  .banner .banner-line-1 {
+    top: 422px;
+    left: -468px;
+    width: 643px;
+    height: 112px;
+    background-position: 8px -24px;
+    opacity: 0;
+    transform: translate3d(2000px, -350px, 0);
+    animation: myShow 0.5s 0.5s;
+    animation-fill-mode: forwards; }
+  .banner .banner-line-2 {
+    top: 562px;
+    left: -384px;
+    width: 489px;
+    height: 80px;
+    background-position: 1px -220px;
+    opacity: 0;
+    transform: translate3d(2000px, -350px, 0);
+    animation: myShow 0.5s 0.5s;
+    animation-fill-mode: forwards; }
+  .banner .banner-line-3 {
+    top: 300px;
+    left: 626px;
+    width: 408px;
+    height: 71px;
+    background-position: -8px -376px;
+    opacity: 0;
+    transform: translate3d(2000px, -350px, 0);
+    animation: myShow 0.5s 0.5s;
+    animation-fill-mode: forwards; }
+  .banner .banner-line-4 {
+    top: 348px;
+    right: -368px;
+    width: 391px;
+    height: 78px;
+    background-position: -3px -470px;
+    opacity: 0;
+    transform: translate3d(2000px, -350px, 0);
+    animation: myShow 0.5s 0.5s;
+    animation-fill-mode: forwards; }
   .banner .banner-triangle {
-    position: absolute; }
+    position: absolute;
+    display: inline-block;
+    background-image: url(../images/banner-triangles.png); }
   .banner .banner-triangle-1 {
+    width: 55px;
+    height: 41px;
     top: 530px;
     right: -30px;
     opacity: 0;
     transform: translate3d(-200px, 20px, 0);
-    animation: myShow 0.5s 1s;
-    animation-fill-mode: forwards; }
+    animation: myShow 0.5s 0.5s;
+    animation-fill-mode: forwards;
+    background-position: 0 0; }
   .banner .banner-triangle-2 {
+    width: 54px;
+    height: 42px;
     top: 330px;
     left: -178px;
     opacity: 0;
     transform: translate3d(500px, 100px, 0);
-    animation: myShow 0.5s 1s;
-    animation-fill-mode: forwards; }
+    animation: myShow 0.5s 0.5s;
+    animation-fill-mode: forwards;
+    background-position: 0 -63px; }
   .banner .banner-triangle-3 {
+    width: 55px;
+    height: 41px;
     top: 94px;
     right: 54px;
     opacity: 0;
     transform: translate3d(-500px, 200px, 0);
-    animation: myShow 1s 1s;
-    animation-fill-mode: forwards; }
+    animation: myShow 1s 0.5s;
+    animation-fill-mode: forwards;
+    background-position: 0 -115px; }
   .banner .banner-triangle-4 {
+    width: 119px;
+    height: 108px;
     top: 528px;
     left: 100px;
     opacity: 0;
     transform: translate3d(300px, -120px, 0);
-    animation: myShow 1s 1s;
-    animation-fill-mode: forwards; }
+    animation: myShow 1s 0.5s;
+    animation-fill-mode: forwards;
+    background-position: 0 -160px; }
   .banner .banner-triangle-5 {
+    width: 27px;
+    height: 23px;
     top: 242px;
     left: 662px;
     opacity: 0;
     transform: translate3d(-100px, -100px, 0);
-    animation: myShow 0.4s 1s;
-    animation-fill-mode: forwards; }
+    animation: myShow 0.4s 0.5s;
+    animation-fill-mode: forwards;
+    background-position: 0 -276px; }
   .banner .banner-triangle-6 {
+    width: 41px;
+    height: 36px;
     top: 210px;
     left: 450px;
     opacity: 0;
     transform: translate3d(100px, 120px, 0);
-    animation: myShow 1s 1s;
-    animation-fill-mode: forwards; }
+    animation: myShow 1s 0.5s;
+    animation-fill-mode: forwards;
+    background-position: 0 -304px; }
   .banner .banner-triangle-7 {
+    width: 107px;
+    height: 115px;
     top: 116px;
     left: -434px;
     opacity: 0;
     transform: translate3d(800px, 120px, 0);
-    animation: myShow 0.5s 1s;
-    animation-fill-mode: forwards; }
+    animation: myShow 0.5s 0.5s;
+    animation-fill-mode: forwards;
+    background-position: 0 -335px; }
   .banner .banner-triangle-8 {
+    width: 78px;
+    height: 65px;
     top: 230px;
     right: 58px;
     opacity: 0;
     transform: translate3d(-400px, 20px, 0);
-    animation: myShow 1s 1s;
-    animation-fill-mode: forwards; }
+    animation: myShow 1s 0.5s;
+    animation-fill-mode: forwards;
+    background-position: 0 -458px; }
   .banner .banner-triangle-9 {
+    width: 78px;
+    height: 66px;
     top: 166px;
     left: 120px;
     opacity: 0;
     transform: translate3d(300px, 0px, 0);
-    animation: myShow 0.8s 1s;
-    animation-fill-mode: forwards; }
+    animation: myShow 0.8s 0.5s;
+    animation-fill-mode: forwards;
+    background-position: 0 -538px; }
   .banner .banner-triangle-10 {
+    width: 23px;
+    height: 26px;
     top: 280px;
     left: -130px;
     opacity: 0;
     transform: translate3d(400px, 120px, 0);
-    animation: myShow 1s 1s;
-    animation-fill-mode: forwards; }
+    animation: myShow 1s 0.5s;
+    animation-fill-mode: forwards;
+    background-position: 0 -602px; }
 
 .heros {
   color: #8a48fa;
-  background: url(../images/content-bg.jpg) center repeat;
-  margin-bottom: 150px; }
+  background: url(../images/content-bg.jpg);
+  background-attachment: fixed; }
   .heros .hero-box {
     padding-top: 58px; }
   .heros .hero-box-header {
@@ -439,18 +475,61 @@ body {
 .rule {
   color: #fff;
   text-align: center;
-  padding: 18px 0 100px; }
+  background: url(../images/footer-bg.jpg) no-repeat;
+  background-size: 100% 100%;
+  padding: 168px 0 50px; }
   .rule h1 {
     font-size: 38px;
     color: #8e73f2;
     font-weight: 400; }
   .rule .rule-list {
-    padding-top: 8px; }
-  .rule .rule-item strong {
-    color: #ffea00;
-    line-height: 30px; }
-  .rule .loopup-explain-btn {
+    padding-top: 12px;
+    padding: 12px 0 202px; }
+  .rule .rule-item {
+    line-height: 22px; }
+    .rule .rule-item strong {
+      color: #ffea00; }
+  .rule .rule-index {
+    display: inline-block;
+    width: 19px;
+    height: 19px;
+    background: url(../images/rule-bg.png) -2px -3px no-repeat;
+    text-align: center; }
+  .rule .lookup-explain-btn {
     color: #0d1627;
-    font-size: 12px; }
+    font-size: 12px;
+    display: inline-block;
+    width: 87px;
+    height: 23px;
+    line-height: 23px;
+    background: url(../images/rule-bg.png) -30px -4px no-repeat;
+    cursor: pointer; }
+  .rule .footer {
+    font-size: 12px;
+    position: relative; }
+  .rule .footer-bg {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 100%;
+    transform: translate(-50%, 0); }
+  .rule .footer-link-list {
+    overflow: hidden;
+    display: inline-block;
+    margin: 0 auto;
+    color: #766c9a; }
+  .rule .footer-link-item {
+    float: left;
+    font-size: 12px;
+    padding: 0 3px; }
+    .rule .footer-link-item:before {
+      content: '|'; }
+    .rule .footer-link-item:first-child:before {
+      display: none; }
+  .rule .footer-link {
+    color: #766c9a; }
+  .rule .footer-copyright {
+    font-size: 10px;
+    padding: 6px 0 10px; }
 
 /*# sourceMappingURL=index.css.map */

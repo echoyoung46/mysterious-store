@@ -39,9 +39,7 @@ var $hasClass = function(el,className){
 	var reg = new RegExp("(\\s|^)?" + className +"(\\s|$)", "i");
 	return reg.test(el.className);
 };
-var $eTarget = function(e){
-	return document.all ? window.event.srcElement : e.target;
-};
+
 var $siblings = function(el) {
   var arr = [],
       allSiblings = el.parentNode.children;
@@ -54,7 +52,9 @@ var $siblings = function(el) {
 
   return arr;
 }
-
+window.isMobile = function () {
+  return !!navigator.userAgent.match(/android|webos|ip(hone|ad|od)|opera (mini|mobi|tablet)|iemobile|windows.+(phone|touch)|mobile|fennec|kindle (Fire)|Silk|maemo|blackberry|playbook|bb10\; (touch|kbd)|Symbian(OS)|Ubuntu Touch/i);
+};
 window.requestFrame = (function(){
   return  window.requestAnimationFrame       ||
     window.webkitRequestAnimationFrame ||
@@ -73,24 +73,31 @@ window.cancelFrame = (function(){
 })();
 
 var init = function () {
-  var canvas = new BannerCanvas('banner-canvas');
+  if ( window.isMobile() ) {
+    window.location.href = 'mobile.html';
+  }else {
+    $id('container').style.display = 'block';
 
-  setTimeout(function() {
-    canvas.init();
-  }, 1400);
-
-  bindEvent();
+    var canvas = new BannerCanvas('banner-canvas');
+    setTimeout(function() {
+      canvas.init();
+    }, 2000);
+    bindEvent();
+  }
 };
 
 var bindEvent = function() {
   var $sideHeros = $id('side-heros'),
-      sideFixPoint = 200,
+      sideFixPoint = 100,
       bannerHeight = $id('banner').clientHeight,
       heroHeight = $id('hero-1').clientHeight;
       
   $addEvent(window,'scroll', function() {
-    var scrollTop = document.body.scrollTop;
-
+    var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    
+    // if(scrollTop > sideFixPoint) {
+      // alert(scrollTop);
+    // }
     scrollTop > sideFixPoint ? $addClass($sideHeros, 'fixed') : $removeClass($sideHeros, 'fixed');
 
     var overHeight = scrollTop - bannerHeight * 2 / 3;
@@ -98,7 +105,6 @@ var bindEvent = function() {
         currHeroDom = $id('side-hero-' + currHero)
         currSiblings = $id('side-heros').getElementsByTagName('a');
     
-    console.log(currSiblings);
     for (var i = 0; i < currSiblings.length; i++) {
       if (currSiblings[i] !== currHeroDom) {
         $removeClass(currSiblings[i], 'active');
@@ -156,15 +162,15 @@ BannerCanvas.prototype = {
   },
   initLines: function () {
     var self = this,
-        count = 5;
+        count = 3;
     
     for (var i = 0; i < count; i++) {
       self.lines.push({
         x: this.canvas.width + Math.random() * 300,
         y: this.canvas.height * Math.random(),
-        length: (Math.random() + 1) * 150,
+        length: (Math.random() + 1) * 200,
         lineW: (Math.random() + 1) * 2,
-        speed: (Math.random() + 1) * 15
+        speed: (Math.random() + 1) * 5
       });
     }
     
@@ -225,7 +231,7 @@ BannerCanvas.prototype = {
       ctx.save();
       ctx.rotate(-8*Math.PI/180);
       ctx.translate(_x, _y);
-      ctx.scale(3,.1);
+      ctx.scale(3,.2);
       ctx.beginPath();
       var circleGrd = ctx.createRadialGradient(0,0,0,0,0,20);
       circleGrd.addColorStop(0,"rgba(255, 255, 255, .5)");
