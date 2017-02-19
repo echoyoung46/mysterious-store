@@ -2,12 +2,14 @@
   100% {
     opacity: 1;
     transform: none; } }
+
 @keyframes scoreChange {
   50% {
     opacity: 1; }
   100% {
     opacity: 0;
     transform: none; } }
+
 html,
 body,
 .container {
@@ -100,6 +102,7 @@ body {
     transform: rotate(-5deg); }
   to {
     transform: rotate(5deg); } }
+
 .school-question {
   position: relative; }
   .school-question .question-bg {
@@ -231,5 +234,3 @@ body {
     box-shadow: 0px -60px 60px 0px #61a81d; }
   .school-choose .shadow-b {
     box-shadow: 0px -60px 60px 0px #538ed5; }
-
-/*# sourceMappingURL=mobile.css.map */

@@ -6,16 +6,40 @@
   100% {
     opacity: 1;
     transform: none; } }
+
 @keyframes totopAnimate {
   0% {
     transform: translate(0, 0); }
   100% {
     transform: translate(0, -10px); } }
+
+.no-cssanimations .banner div,
+.no-cssanimations .banner a,
+.no-cssanimations .banner img,
+.no-cssanimations .banner span,
+.no-cssanimations .side-heros {
+  opacity: 1 !important;
+  transform: none !important; }
+
+html, body {
+  _height: 100%;
+  _overflow: hidden; }
+
 body {
-  font: 14px "Microsoft YaHei", sans-serif; }
+  _position: relative;
+  font: 14px "Microsoft YaHei", sans-serif;
+  background-image: url(../images/content-bg.jpg);
+  background-size: 100%; }
+  body.fixed {
+    background-attachment: fixed; }
+    body.fixed .heros {
+      background: transparent; }
 
 .container {
-  display: none; }
+  _height: 100%;
+  display: none;
+  overflow: hidden;
+  _overflow: auto; }
 
 #banner-canvas {
   position: absolute;
@@ -34,7 +58,9 @@ body {
   animation-fill-mode: forwards; }
   .side-heros.fixed {
     position: fixed;
-    top: 200px; }
+    _position: absolute;
+    top: 100px;
+    right: 78px; }
   .side-heros .to-top {
     display: block;
     width: 56px;
@@ -87,8 +113,12 @@ body {
     .side-heros .side-heros-link.active {
       background-image: url(../images/side-heros-active.png); }
 
+.container {
+  text-align: center; }
+
 .center-wrapper {
   width: 930px;
+  *width: 1000px;
   height: 100%;
   padding: 0 35px;
   margin: 0 auto;
@@ -96,8 +126,8 @@ body {
 
 .banner {
   height: 786px;
-  background: url(../images/banner-bg.jpg) center top no-repeat;
-  overflow: hidden; }
+  background: url(../images/banner-bg.jpg) center top;
+  background-size: cover; }
   .banner .lol-link {
     display: block;
     width: 190px;
@@ -351,8 +381,10 @@ body {
 
 .heros {
   color: #8a48fa;
-  background: url(../images/content-bg.jpg);
-  background-attachment: fixed; }
+  background-image: url(../images/content-bg.jpg);
+  background-size: 100%; }
+  .heros.fixed {
+    background-attachment: fixed; }
   .heros .hero-box {
     padding-top: 58px; }
   .heros .hero-box-header {
@@ -419,8 +451,11 @@ body {
   .heros .hero-box-sale {
     float: right;
     margin: -17px 15px 0 0;
+    display: -ms-flexbox;
     display: flex;
+    -ms-flex-align: center;
     align-items: center;
+    -ms-flex-pack: center;
     justify-content: center; }
     .heros .hero-box-sale strong {
       font: 90px impact;
@@ -432,7 +467,7 @@ body {
     width: 146px;
     float: left;
     margin-left: 10px; }
-    .heros .hero-item:first-child {
+    .heros .hero-item.first {
       margin-left: 0; }
   .heros .hero-pic {
     display: block;
@@ -517,7 +552,9 @@ body {
     overflow: hidden;
     display: inline-block;
     margin: 0 auto;
-    color: #766c9a; }
+    color: #766c9a;
+    *zoom: 1;
+    *display: inline; }
   .rule .footer-link-item {
     float: left;
     font-size: 12px;
@@ -532,4 +569,42 @@ body {
     font-size: 10px;
     padding: 6px 0 10px; }
 
-/*# sourceMappingURL=index.css.map */
+.no-backgroundsize .hero-box-title .hero-icon {
+  background-color: transparent;
+  width: 65px;
+  height: 65px; }
+  .no-backgroundsize .hero-box-title .hero-icon-1 {
+    background-position: -2px -2px; }
+  .no-backgroundsize .hero-box-title .hero-icon-2 {
+    background-position: -2px -77px; }
+  .no-backgroundsize .hero-box-title .hero-icon-3 {
+    background-position: -2px -152px; }
+  .no-backgroundsize .hero-box-title .hero-icon-4 {
+    background-position: -2px -227px; }
+  .no-backgroundsize .hero-box-title .hero-icon-5 {
+    background-position: -2px -302px; }
+  .no-backgroundsize .hero-box-title .hero-icon-6 {
+    background-position: -2px -377px; }
+  .no-backgroundsize .hero-box-title .hero-icon-7 {
+    background-position: -2px -452px; }
+  .no-backgroundsize .hero-box-title .hero-icon-8 {
+    background-position: -2px -524px; }
+  .no-backgroundsize .hero-box-title .hero-icon-9 {
+    background-position: -68px -2px; }
+  .no-backgroundsize .hero-box-title .hero-icon-10 {
+    background-position: -68px -77px; }
+  .no-backgroundsize .hero-box-title .hero-icon-11 {
+    background-position: -68px -152px; }
+  .no-backgroundsize .hero-box-title .hero-icon-12 {
+    background-position: -68px -227px; }
+  .no-backgroundsize .hero-box-title .hero-icon-13 {
+    background-position: -68px -302px; }
+  .no-backgroundsize .hero-box-title .hero-icon-14 {
+    background-position: -68px -377px; }
+  .no-backgroundsize .hero-box-title .hero-icon-15 {
+    background-position: -68px -452px; }
+  .no-backgroundsize .hero-box-title .hero-icon-16 {
+    background-position: -68px -524px; }
+
+.no-boxsizing .heros .hero-box {
+  zoom: 1; }
