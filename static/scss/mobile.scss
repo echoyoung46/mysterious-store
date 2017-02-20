@@ -262,8 +262,9 @@ body {
     font-size: 60px;
     text-align: center;
     width: px2percent(300);
-    height: px2percent(227, 1008);
-    line-height: 100px;
+    // height: px2percent(227, 1008);
+    height: 114px;
+    line-height: 114px;
     border-radius: 5px;
     position: relative;
   }

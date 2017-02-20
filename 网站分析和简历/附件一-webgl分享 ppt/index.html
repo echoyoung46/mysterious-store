@@ -1,0 +1,722 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Time33-WebGL</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/webgl.css">
+		<link rel="stylesheet" href="css/theme/blood.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>WebGL</h1>
+					<!--<h3>A Rasterization API</h3>-->
+					<p>
+						<small>Created by <a href="#">@yangwt</a></small>
+					</p>
+				</section>
+
+				<section>
+                    <section>
+                        <h2>What?</h2>
+                        <p>
+                            WebGL是一项用来在网页上绘制和渲染复杂三维图形（3D图形），并允许用户与之进行交互的技术。
+                        </p>
+                        <p>WebGL 本质上是基于光栅化的 API ,而不是基于 3D 的 API。</p>
+                    </section>
+                    <section>
+                        <h2>光栅化</h2>
+                        <p>把物体的数学描述以及与物体相关的颜色信息转换为屏幕上用于对应位置的像素及用于填充像素的颜色，这个过程称为光栅化。</p>
+                    </section>
+				</section>
+                <section>
+					<h2>优势</h2>
+                    <ul>
+                        <li>只需在HTML和JavaScript中添加三维图形学的代码</li>
+                        <li>WebGL是内嵌在浏览器中，不必安装插件和库就可以使用</li>
+                        <li>基于浏览器，可以在多平台运行</li>
+                        <li>开发简单，不用搭建开发环境</li>
+                        <li>利用图形硬件来加速渲染</li>
+                    </ul>
+				</section>
+
+				<section>
+                    <section>
+						<h2>How it works?</h2>
+					</section>
+                    <section>
+                        <img src="images/webgl_graphics_pipeline.jpg" alt="">
+                    </section>
+                    
+					<section>
+						<h2>着色器</h2>
+						<p>WebGL只关注两件事——坐标和颜色。</p>
+                        <p>使用WebGL程序的任务就是实现具有投影矩阵坐标和颜色的WebGL对象即可。</p>
+                        <p>定义两个着色器———顶点着色器和片元着色器。顶点着色器提供坐标,片元着色器提供颜色</p>
+                        <p>tips: 无论画板尺寸多大，投影矩阵坐标的范围只会在-1到1之间</p>
+						<br>
+					</section>
+					<section>
+                        <pre><code class="hljs" data-trim contenteditable>
+<script id="2d-vertex-shader" type="x-shader/x-vertex">
+attribute vec2 a_position;
+
+void main() {
+gl_Position = vec4(a_position, 0, 1);
+}
+</script>
+
+<script id="2d-fragment-shader" type="x-shader/x-fragment">
+void main() {
+gl_FragColor = vec4(0, 1, 0, 1); // green
+}
+</script>
+					   </code></pre>
+                       <img width="320" height="250" src="images/fragment_shader.jpg" alt="">
+					</section>
+					<section>
+						<p>着色器是用GLSL写的方法。处理每个顶点时都要引用一次，将定义的3D坐标点转化为屏幕可以显示出来的2D顶点，即投影矩阵的坐标。</p>
+                        <p>用户可以将投影矩阵的值存储在特定的变量gl_Position中。GPU会处理这些值，并将它们存储在内部。</p>
+                        <p>片元着色器中gl_fragColor设置颜色，描绘图形时，每个px都会通过片元着色器得到该px的颜色。</p>
+						<br>
+						<a href="#/2">
+							<img width="378" height="238" src="images/vertex-shader-anim.gif">
+						</a>
+					</section>
+                    <section>
+                        <ul>
+                            <li>产生三个顶点</li>
+                            <li>GPU会使用它们来绘制三角形</li>
+                            <li>将三角形光栅化，或者说是使用像素点绘制出来</li>
+                            <li>对每一个像素点，GPU会调用片元着色器来确定该像素的颜色</li>
+                        </ul>
+                        <img src="images/fragment_operations.jpg" alt="">
+                    </section>
+				</section>
+                
+                <section>
+                    <section>
+                        <h2>WebGL API</h2>
+                    </section>
+                    
+                    <section>
+                        <p>WebGL context</p>
+                        <pre><code class="hljs" data-trim contenteditable>
+var canvas = document.getElementById("canvas");
+var gl = getWebGLContext(canvas);
+					   </code></pre>
+                    </section>
+                    
+                    <section>
+                        <h2>变量类型</h2>
+                        <p>const 常量</p>
+                        <p class="fragment">attribute 顶点着色器定义的全局变量，存储可变的顶点坐标值</p>
+                        <p class="fragment">uniform 着色器定义的只读变量</p>
+                        <p class="fragment">varing 定义在顶点和片元着色器之间传递的变量，在顶点着色器定义，片元着色器中只读</p>
+                    </section>
+                    
+                    <section>
+                        <h2>创建program</h2>
+                        <p>webgl-utils.js</p>
+                        <p>createProgramFromScript(gl, ["2d-vertex-shader", "2d-fragment-shader"]); 创建一个GLSL Program</p>
+                    </section>
+                    
+                    <section>
+                        <h2>查找数据</h2>
+                        <p>gl.getAttribLocation(program, "a_position"); </p>
+                        <p class="fragment">gl.getUniformLocation(program, "a_position"); </p>
+                    </section>
+                    
+                    <section>
+                        <h2>设置分辨率</h2>
+                        <p>gl.uniform2f(location, canvas.width, canvas.height); 设置分辨率</p>
+                        <p>gl.uniform4f(colorLocation, Math.random(), Math.random(), Math.random(), 1); 设置随机颜色</p>    
+                    </section>
+                    
+                    <section>
+                        <h2>缓冲区</h2>
+                        <p>gl.createBuffer(); 创建缓冲区</p>
+                        <p class="fragment">gl.bindBuffer(gl.ARRAY_BUFFER, buffer); 绑定缓冲区为当前操作对象</p>
+                        <p class="fragment">gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([]), gl.STATIC_DRAW); 将内存中的顶点数组复制到当前操作的数据缓冲区中</p>
+                    </section>
+                    
+                    <section>
+                        <h2></h2>
+                        <p class="fragment">gl.enableVertexAttribArray(anyVertexAttributeLocation); 开启数组模式</p>
+                        <p class="fragment">gl.vertexAttribPointer(index, size, type, normalized, stride, offset); 把当前工作的数据缓冲区指定给数组</p>
+                    </section>
+                    
+                    <section>
+                        <h2>画图</h2>
+                        <p>gl.clear(gl.COLOR_BUFFER_BIT); 清空canvas</p>
+                        <p class="fragment">gl.uniformMatrix(matrixLocation, false, matrix); 创建矩阵</p>
+                        <p class="fragment">gl.drawArray(gl.TRIANGLE, 0, 3); 意味着有3个顶点要处理</p>
+                    </section>
+                </section>
+                
+                <section>
+                    <section>
+                        <h2>WebGL绘制图形</h2>
+                    </section>
+                    <section>
+                        <h2>2D</h2>
+                        <img width="500" height="400" src="images/2df.png" alt="">
+                    </section>
+                    
+                    <section>
+                        <h2>定义坐标点</h2>
+                                <pre><code class="hljs" data-trim contenteditable>
+new Float32Array([
+    // left column
+    0,  0,
+    30, 0,
+    0,  150,
+    0,  150,
+    30, 0,
+    30, 150,
+
+    // top rung
+    30,  0,
+    100, 0,
+    30,  30,
+    30,  30,
+    100, 0,
+    100, 30,
+
+    // middle rung
+    30, 60,
+    67, 60,
+    30, 90,
+    30, 90,
+    67, 60,
+    67, 90])
+                                </code></pre> 
+                
+                    </section>
+                    
+                    <section>
+                        <h2>绘制方法</h2>
+                                <pre><code class="hljs" data-trim contenteditable>
+// Set the matrix.
+gl.uniformMatrix3fv(matrixLocation, false, matrix);
+
+// Draw the geometry.
+gl.drawArrays(gl.TRIANGLES, 0, 18);
+                                </code></pre>
+                                
+                    </section>
+                    
+                    <section>
+                        <h2>定义着色器</h2>
+                                <pre><code class="hljs" data-trim contenteditable>
+<script id="2d-vertex-shader" type="x-shader/x-vertex">
+    attribute vec2 a_position;
+
+    uniform mat3 u_matrix;
+
+    void main() {
+    gl_Position = u_matrix * a_position;
+    }
+</script>
+                                </code></pre>
+                               
+                    </section>
+                    <section>
+                        <iframe src="demo/2d.html" width="445" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+                    </section>
+                    <!--<section>
+                        <h2>Why vec4?</h2>
+                        <a href="http://webglfundamentals.org/webgl/lessons/webgl-3d-orthographic.html">more</a>
+                    </section>-->
+                </section>
+                
+                <section>
+                    <section>
+                        <h2>进入3D世界</h2>
+                        <p>计算机的3D世界由点组成，两个不重合的点组成一条直线，三个不在一条直线上的点就能组成一个三角形面，无数三角形面就能够组成各种形状的物体。</p>
+                    </section>
+                    
+                    <section>
+                        <h2>&nbsp;</h2>
+                        <p>3D与2D最显著区别就是，3D具有深度，也就是Z轴（垂直屏幕方向）</p>
+                        <img src="images/coordinate.jpg" alt="">
+                    </section>
+                    
+                    <section>
+                        <h2>3D</h2>
+                        <img width="500" height="400" src="images/3df.png" alt="">
+                    </section>
+                    
+                    <section>
+                        <h2>定义3D坐标</h2>
+                        <pre><code class="hljs" data-trim contenteditable>
+new Float32Array([
+    // left column front
+    0,  0,   0,
+    30, 0,   0,
+    0,  150, 0,
+    0,  150, 0,
+    30, 0,   0,
+    30, 150, 0,
+    
+    ...(此处省略13个顶点坐标)
+    
+    // bottom
+    0,   150,   0,
+    0,   150,  30,
+    30,  150,  30,
+    0,   150,   0,
+    30,  150,  30,
+    30,  150,   0,
+
+    // left side
+    0,   0,   0,
+    0,   0,  30,
+    0, 150,  30,
+    0,   0,   0,
+    0, 150,  30,
+    0, 150,   0]),
+
+                        </code></pre>
+                    </section>
+                    
+                    <section>
+                        <h2>绘制3D图形</h2>
+                        <pre><code class="hljs" data-trim contenteditable>
+// Set the matrix.
+gl.uniformMatrix4fv(matrixLocation, false, matrix);
+
+// Draw the geometry.
+gl.drawArrays(gl.TRIANGLES, 0, 16*6);
+                        </code></pre>
+                    </section>
+                    
+                    <section>
+                        <h2>定义着色器</h2>
+                        <pre><code class="hljs" data-trim contenteditable>
+<script id="3d-vertex-shader" type="x-shader/x-vertex">
+    attribute vec4 a_position;
+    
+    uniform mat4 u_matrix;
+    
+    void main() {
+    // Multiply the position by the matrix.
+    gl_Position = u_matrix * a_position;
+    }
+</script>
+                        </code></pre>
+                    </section>
+                    <section>
+                        <iframe src="demo/3d.html" width="445" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+                    </section>
+                    
+                    <section>
+                        <h2>顶点顺序</h2>
+                        <p>WebGL有前面和后面的概念 （看得见的为前面）。</p>
+                        <p>前面的顶点坐标以顺时针的顺序定义</p>
+                        <p>后面的顶点坐标以逆时针的顺序定义</p>
+                        <p>
+                            <img src="images/triangle-winding.svg" alt="" class="webgl_center" width="400">
+                        </p>
+                    </section>
+                    
+                    <section>
+                        <iframe src="demo/backfacing.html" width="445" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+                    </section>
+                    
+                    <section>
+                        <p>Not</p>
+                        <pre><code class="hljs" data-trim contenteditable>
+  1,   2,   3,
+ 40,  50,  60,
+700, 800, 900,
+                        </code></pre>
+                        <p>But</p>
+                        <pre><code class="hljs" data-trim contenteditable>
+  1,   2,   3,
+700, 800, 900,
+ 40,  50,  60,
+                        </code></pre>
+                    </section>
+                </section>
+                
+                <section>
+                    <h2>WebGL其他因素</h2>
+                    <ul>
+                        <li>动画</li>
+                        <li>纹理</li>
+                        <li>透视</li>
+                        <li>镜头</li>
+                    </ul>
+                </section>    
+                    
+                <section>
+                    <section>
+                        <h2>动画</h2>
+                        <div class="compare-box">
+                            <div class="compare-content">
+                                <p>scale of 2, 1, rotation of 30 degrees, and translation of 100, 0</p>
+                                <img src="images/f-scale-rotation-translation.svg" alt="">
+                            </div>
+                            <div class="compare-content">
+                                <p>translation of 100,0, rotation of 30 degrees and scale of 2, 1</p>
+                                <img src="images/f-translation-rotation-scale.svg" alt="">
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <section>
+                        <h2>Matrix</h2>
+                        <p>2D 3x3 Matrix</p>
+                        <img src="images/matrix33.png" alt="">
+                        <img src="images/matrix1.png" alt="">
+                    </section>
+                    
+                    <section>
+                        <h2>Translate</h2>
+                        <img src="images/matrix2.png" alt="" height="200">
+                        <img src="images/matrix3.png" alt="">
+                        <img src="images/matrix4.png" alt="">
+                    </section>
+                    
+                    <section>
+                        <h2>Rotation</h2>
+                        <p>s = Math.sin(angleToRotateInRadians)</p>
+                        <p>c = Math.cos(angleToRotateInRadians)</p>
+                        <img src="images/rotation1.png" alt="">
+                        <img src="images/rotation2.png" alt="">
+                        <img src="images/rotation3.png" alt="">
+                    </section>
+                    
+                    <section>
+                        <h2>Scale</h2>
+                        <img src="images/scale1.png" alt="">
+                        <img src="images/scale2.png" alt="">
+                        <img src="images/scale3.png" alt="">
+                    </section>
+                    
+                    <!--<section>
+                        <p>Matrix适合运用在分层的动画中，比如胳膊、树枝。</p>
+                    </section>-->
+                    
+                    <section>
+                        <iframe src="demo/3d.html" width="445" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+                    </section>
+                </section>
+                
+				<section>
+					<section id="fragments">
+                        <h2>纹理</h2>
+                        <p>将一张图像映射（贴）到一个集合图形的表面，这张图片称为纹理图像或纹理。</p>
+                        <p>纹理映射的作用，就是根据纹理图像，为之前光栅化后的每个片元涂上合适的颜色。组成纹理图像的像素又被称为纹素。</p>
+					</section>
+					<section>
+						<h2>纹理映射步骤</h2>
+						<p>准备好映射到几何图形上的纹理图像(不能跨域)</p>
+						<p class="fragment">为几何图形配置纹理映射方式</p>
+						<p class="fragment">加载纹理图像，对其进行一些配置，以在WebGL中使用它。</p>
+                        <p class="fragment">在片元着色器中将相应的纹素从纹理中抽取出来，并将纹素的颜色赋给片元。</p>
+					</section>
+                    <section>
+                        <p>顶点着色器定义纹理坐标</p>
+                        <pre><code class="hljs" data-trim contenteditable>
+attribute vec4 a_position;
+attribute vec2 a_texcoord;
+ 
+uniform mat4 u_matrix;
+ 
+varying vec2 v_texcoord;
+ 
+void main() {
+  // Multiply the position by the matrix.
+  gl_Position = u_matrix * a_position;
+ 
+  // Pass the texcoord to the fragment shader.
+  v_texcoord = a_texcoord;
+}
+                        </code></pre>
+                    </section>
+                    <section>
+                        <p>sampler2D引用纹理，texture2D得到颜色</p>
+                        <pre><code class="hljs" data-trim contenteditable>
+precision mediump float;
+ 
+// Passed in from the vertex shader.
+varying vec2 v_texcoord;
+ 
+// The texture.
+uniform sampler2D u_texture;
+ 
+void main() {
+   gl_FragColor = texture2D(u_texture, v_texcoord);
+}
+                        </code></pre>
+                    </section>
+                    <section>
+                        <p>设置纹理坐标</p>
+                        <pre><code class="hljs" data-trim contenteditable>
+var positionLocation = gl.getAttribLocation(program, "a_position");
+var texcoordLocation = gl.getAttribLocation(program, "a_texcoords");
+ 
+...
+ 
+// Create a buffer for texcoords.
+var buffer = gl.createBuffer();
+gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+gl.enableVertexAttribArray(texcoordLocation);
+// We'll supply texcoords as floats.
+gl.vertexAttribPointer(texcoordLocation, 2, gl.FLOAT, false, 0, 0);
+// Set Texcoords.
+setTexcoords(gl);
+                        </code></pre>
+                    </section>
+                    <section>
+                        <pre><code class="hljs" data-trim contenteditable>
+function setTexcoords(gl) {
+  gl.bufferData(
+      gl.ARRAY_BUFFER,
+      new Float32Array([
+        // left column front
+        0, 0,
+        0, 1,
+        1, 0,
+        0, 1,
+        1, 1,
+        1, 0,
+        // top rung front
+        0, 0,
+        0, 1,
+        1, 0,
+        0, 1,
+        1, 1,
+        1, 0,
+ ...
+                        </code></pre>
+                    </section>
+                    <section>
+                        <p>引入图片</p>
+                        <pre><code class="hljs" data-trim contenteditable>
+var texture = gl.createTexture();
+gl.bindTexture(gl.TEXTURE_2D, texture);
+// Fill the texture with a 1x1 blue pixel.
+gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE,
+              new Uint8Array([0, 0, 255, 255]));
+// Asynchronously load an image
+var image = new Image();
+image.src = "resources/f-texture.png";
+image.addEventLisenter('load', function() {
+  // Now that the image has loaded make copy it to the texture.
+  gl.bindTexture(gl.TEXTURE_2D, texture);
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA,gl.UNSIGNED_BYTE, image);
+  gl.generateMips(gl.TEXTURE_2D);
+});
+                        </code></pre>
+                        <a href="demo/textures.html" target="_blank"></a>
+                    </section>
+                    <section>
+                        <iframe src="demo/textures.html" width="445" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+                    </section>
+				</section>
+                
+                <section>
+                    <section>
+                        <h2>透视</h2>
+                        <p>即近大远小的特征</p>
+                        <img src="images/perspective-example.svg" alt="">
+                    </section>
+                    
+                    <section>
+                        <p>实现：将坐标X和Y除以Z</p>
+                        <pre><code class="hljs" data-trim contenteditable>
+<script id="2d-vertex-shader" type="x-shader/x-vertex">
+...
+uniform float u_fudgeFactor;
+...
+void main() {
+  // Multiply the position by the matrix.
+  vec4 position = u_matrix * a_position;
+
+  // Adjust the z to divide by
+  float zToDivideBy = 1.0 + position.z * u_fudgeFactor;
+
+  // Divide x and y by z.
+  gl_Position = vec4(position.xy / zToDivideBy, position.zw);
+}
+</script>
+                        </code></pre>
+                        <p>clipspace 中 Z 从 -1 到 +1，加 1 之后 zToDivideBy 从 0 到 +2 * fudgeFactor</p>
+                    </section>
+                    
+                    <section>
+                        <iframe src="demo/perspective.html" width="545" height="455" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+                    </section>
+                </section>
+                
+                <section>
+                    <section>
+                        <h2>镜头</h2>
+                        <div class="compare-box">
+                            <div class="conpare-content webgl-half">
+                                <p>移动镜头</p>
+                                <iframe src="demo/camera-move.html?mode=0" width="400" height="300" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+                            </div>
+                            <div class="conpare-content webgl-half">
+                                <p>移动物体</p>
+                                <iframe src="demo/camera-move.html?mode=1" width="400" height="300" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <p>镜头移到原点</p>
+                        <iframe src="demo/camera-move.html?mode=2" width="400" height="300" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+                    </section>
+                    <section>
+                        <p>画一圈F</p>
+                        <pre><code class="hljs" data-trim contenteditable>
+<script id="2d-vertex-shader" type="x-shader/x-vertex">
+var numFs = 5;
+  var radius = 200;
+
+  // Compute the projection matrix
+  var aspect = canvas.clientWidth / canvas.clientHeight;
+  var projectionMatrix =
+      makePerspective(fieldOfViewRadians, aspect, 1, 2000);
+
+  // Draw 'F's in a circle
+  for (var ii = 0; ii < numFs; ++ii) {
+    var angle = ii * Math.PI * 2 / numFs;
+
+    var x = Math.cos(angle) * radius;
+    var z = Math.sin(angle) * radius;
+    var translationMatrix = makeTranslation(x, 0, z);
+
+    // Multiply the matrices.
+    var matrix = translationMatrix;
+    matrix = matrixMultiply(matrix, projectionMatrix);
+
+    // Set the matrix.
+    gl.uniformMatrix4fv(matrixLocation, false, matrix);
+
+    // Draw the geometry.
+    gl.drawArrays(gl.TRIANGLES, 0, 16 * 6);
+  }
+</script>
+                        </code></pre>
+                    </section>
+                    <section>
+                        <p>画镜头</p>
+                        <pre><code class="hljs" data-trim contenteditable>
+ var cameraMatrix = makeTranslation(0, 0, radius * 1.5);
+  cameraMatrix = matrixMultiply(cameraMatrix, makeYRotation(cameraAngleRadians);
+                        </code></pre>
+                    </section>
+                    <section>
+                        <p>根据镜头矩阵计算视图矩阵</p>
+                        <pre><code class="hljs" data-trim contenteditable>
+var viewMatrix = makeInverse(cameraMatrix);
+                        </code></pre>
+                    </section>
+                    <section>
+                        <p>应用视图矩阵来计算每个F的矩阵</p>
+                        <pre><code class="hljs" data-trim contenteditable>
+var matrix = translationMatrix;
+    matrix = matrixMultiply(matrix, viewMatrix);  // <=-- added
+    matrix = matrixMultiply(matrix, projectionMatrix);
+                        </code></pre>
+                    </section>
+                    <section>
+                        <iframe src="demo/camera.html" width="545" height="455" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+                    </section>
+                </section>
+                
+                <section>
+                    <section>
+                        <h1>福利</h1>
+                    </section>
+                    
+                    <section>
+                        <h2>miao~</h2>
+                        <iframe src="demo/cat.html" width="445" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+                    </section>
+				</section>
+
+                <section>
+                    <h2>Recommend Link</h2>
+                    <p><a href="webglfundamentals.org" target="_blank">webglfundamentals.org</a></p>
+                    <p><a href="www.tutorailspoint.com/webgl/" target="_blank">www.tutorailspoint.com/webgl/</a></p>
+                    <p><a href="learningwebgl.com/blog/" target="_blank">learningwebgl.com/blog/</a></p>
+                    <p><a href="www.html5china.com/HTML5features/WebGL/" target="_blank">www.html5china.com/HTML5features/WebGL/</a></p>
+                </section>
+                
+				<section>
+					<h1>THE END</h1>
+                    <p>Thank you.</p>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
